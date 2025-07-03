@@ -10,7 +10,7 @@ while (true)
 {
     Console.WriteLine("Escolha uma opção:");
     Console.WriteLine("1 - Gerar valores de p e q aleatoriamente");
-    Console.WriteLine("2 - Digitar valores de p e q manualmente");
+    Console.WriteLine("2 - Digitar valores de p e q manualmente\nEx: p = 174166265209585933744872919681332961507 | q = 257108794072914633043712785291406516647\n");
     Console.Write("Opção: ");
     string opcao = Console.ReadLine();
     if (opcao == "1")
