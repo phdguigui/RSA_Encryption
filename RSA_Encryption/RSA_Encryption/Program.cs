@@ -9,7 +9,7 @@ BigInteger p, q;
 while (true)
 {
     Console.WriteLine("Escolha uma opção:");
-    Console.WriteLine("1 - Gerar valores de p e q aleatoriamente (grandes)");
+    Console.WriteLine("1 - Gerar valores de p e q aleatoriamente");
     Console.WriteLine("2 - Digitar valores de p e q manualmente");
     Console.Write("Opção: ");
     string opcao = Console.ReadLine();
@@ -49,7 +49,7 @@ while (true)
 }
 
 // Entrada da mensagem
-Console.Write("Digite a mensagem (ex: abc): ");
+Console.Write("Digite a mensagem: ");
 string mensagem = Console.ReadLine();
 
 // Conversão da mensagem em ASCII
@@ -61,10 +61,14 @@ Console.WriteLine("\nMensagem ASCII: " + string.Join(" ", asciiOriginal));
 
 // Gerar chaves pública e privada
 BigInteger n = p * q;
+// φ(n) = (p - 1) * (q - 1)
 BigInteger phi = (p - 1) * (q - 1);
 
-// Escolher automaticamente e (coprimo de phi)
+// Escolher e, sendo um número coprimo com φ(n) e 1 < e < φ(n)
 BigInteger e = Helpers.FindCoprime(phi);
+// d ≡ e^(-1) (mod φ(n))
+// Isso é d * e ≡ 1 (mod φ(n))
+// Ou seja, um número d tal que (d * e) % φ(n) = 1
 BigInteger d = Helpers.ModInverse(e, phi);
 
 Console.WriteLine($"\nChave Pública: (n = {n}, e = {e})");
@@ -73,6 +77,8 @@ Console.WriteLine($"Chave Privada: (n = {n}, d = {d})");
 // Criptografar mensagem
 List<BigInteger> criptografada = new List<BigInteger>();
 foreach (int ascii in asciiOriginal)
+    // Criptografia RSA: c ≡ m^e (mod n)
+    // Ou seja, c = ascii^e mod n
     criptografada.Add(BigInteger.ModPow(ascii, e, n));
 
 Console.WriteLine("\nMensagem Criptografada: " + string.Join(" ", criptografada));
@@ -80,6 +86,8 @@ Console.WriteLine("\nMensagem Criptografada: " + string.Join(" ", criptografada)
 // Descriptografar mensagem
 List<int> descriptografada = new List<int>();
 foreach (BigInteger c in criptografada)
+    // Descriptografia RSA: m ≡ c^d (mod n)
+    // Ou seja, m = c^d mod n
     descriptografada.Add((int)BigInteger.ModPow(c, d, n));
 
 Console.WriteLine("\nMensagem Descriptografada (ASCII): " + string.Join(" ", descriptografada));

@@ -8,7 +8,7 @@ namespace RSA_Encryption
     public class Helpers
     {
         /// <summary>
-        /// Gera dois números primos distintos e grandes aleatórios (por exemplo, 128 bits).
+        /// Gera dois números primos distintos e grandes aleatórios
         /// </summary>
         /// <param name="bitLength">Tamanho do primo em bits.</param>
         /// <returns>Tupla contendo dois primos grandes distintos.</returns>
@@ -139,6 +139,7 @@ namespace RSA_Encryption
 
         /// <summary>
         /// Calcula o inverso multiplicativo de 'a' módulo 'm'.
+        /// (Algoritmo de Euclides)
         /// </summary>
         public static BigInteger ModInverse(BigInteger a, BigInteger m)
         {
