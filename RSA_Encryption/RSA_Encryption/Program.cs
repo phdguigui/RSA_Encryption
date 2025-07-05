@@ -98,3 +98,4 @@ foreach (int ascii in descriptografada)
     mensagemFinal += (char)ascii;
 
 Console.WriteLine("Mensagem Final: " + mensagemFinal);
+Console.ReadKey();
